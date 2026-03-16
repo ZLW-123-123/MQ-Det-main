@@ -1,21 +1,32 @@
-0. Environment Setup
-----------------------------------------------------------------------
-a) Create and activate a virtual environment (optional, skip if you already have a ready environment)
-   $ conda create -n mq-det python=3.9 -y
-   $ conda activate mq-det
-b) Install Dependencies
-   The `requirements.txt` and `init.sh` files are provided in the project root directory.
-   Please run the following commands in sequence to install the required dependencies:
-   
-   $ bash init.sh
-   This script will automatically install the required dependencies and compile relevant extensions.
+# MQ-Det
 
-1. Datasets
-----------------------------------------------------------------------
+## 0. Environment Setup
+
+### a) Create and activate a virtual environment
+(Optional, skip if you already have a ready environment)
+
+```bash
+conda create -n mq-det python=3.9 -y
+conda activate mq-det
+```
+
+### b) Install Dependencies
+The `requirements.txt` and `init.sh` files are provided in the project root directory.
+Please run the following commands in sequence to install the required dependencies:
+
+```bash
+bash init.sh
+```
+This script will automatically install the required dependencies and compile relevant extensions.
+
+## 1. Datasets
+
 The project configuration file uses the relative path `datasets/` to locate data by default.
 Please make sure to create a folder named `datasets` in the project root directory, and place your datasets (e.g., dataset1, dataset2, dataset3) inside it.
 
-Directory Structure Example:
+### Directory Structure Example
+
+```text
 project_root/
   ├── configs/
   ├── tools/
@@ -27,51 +38,76 @@ project_root/
       │   └── test/
       ├── dataset2/
       └── dataset3/
+```
 
 If your datasets are stored in another location, map them to the `datasets` directory by creating a soft link:
-$ ln -s /path/to/your/real/datasets ./datasets
 
-2. Pretrained Model
-----------------------------------------------------------------------
-$ mkdir OUTPUT/MQ-GD-COCO-Pretrain/
+```bash
+ln -s /path/to/your/real/datasets ./datasets
+```
 
-Model download is available via Baidu Netdisk share: https://pan.baidu.com/s/1dpqdTUs9mMbAs-t9zF4w0w?pwd=khtw  Extraction code: khtw 
-Decompression command: tar -xJvf model_final.tar.xz
+## 2. Pretrained Model
+
+Create the output directory:
+
+```bash
+mkdir -p OUTPUT/MQ-GD-COCO-Pretrain/
+```
+
+**Model Download:**
+- **Baidu Netdisk**: [Link](https://pan.baidu.com/s/1dpqdTUs9mMbAs-t9zF4w0w?pwd=khtw)
+- **Extraction Code**: `khtw`
+
+**Decompression command:**
+
+```bash
+tar -xJvf model_final.tar.xz
+```
 
 Please move the pretrained weight file to the following path:
-OUTPUT/MQ-GD-COCO-Pretrain/model_final.pth
+`OUTPUT/MQ-GD-COCO-Pretrain/model_final.pth`
 
 If the folder does not exist, please create it manually and copy the model file into it.
 
-3. BERT Language Model (For Offline Operation)
-----------------------------------------------------------------------
-The configuration file `configs/finetune/mq-groundingdino-t.yaml` uses "bert-base-uncased" downloaded online from HuggingFace by default.
+## 3. BERT Language Model (For Offline Operation)
+
+The configuration file `configs/finetune/mq-groundingdino-t.yaml` uses `bert-base-uncased` downloaded online from HuggingFace by default.
 
 If the new environment has no network access, you need to:
-1. Manually download the "bert-base-uncased" model files (including config.json, pytorch_model.bin, vocab.txt, etc.).
+
+1. Manually download the "bert-base-uncased" model files (including `config.json`, `pytorch_model.bin`, `vocab.txt`, etc.).
 2. Place them in a local directory, e.g., `pretrained_models/bert-base-uncased`.
 3. Modify the `configs/finetune/mq-groundingdino-t.yaml` file:
-   Change the values of `TOKENIZER_TYPE`, `MODEL_TYPE` and `text_encoder_type` from "bert-base-uncased" to your local absolute or relative path.
+   Change the values of `TOKENIZER_TYPE`, `MODEL_TYPE` and `text_encoder_type` from `"bert-base-uncased"` to your local absolute or relative path.
 
-4. Query Bank File
-----------------------------------------------------------------------
-First, extract the Query Bank
-$ mkdir MODEL
-$ bash run_extract_test_queries.sh
+## 4. Query Bank File
 
-5. Run Fine-tuning Code
-----------------------------------------------------------------------
+First, extract the Query Bank:
+
+```bash
+mkdir -p MODEL
+bash run_extract_test_queries.sh
+```
+
+## 5. Run Fine-tuning Code
+
 Execution command:
-$ bash run_stage2_all_test_tasks.sh
+
+```bash
+bash run_stage2_all_test_tasks.sh
+```
 
 This script will automatically iterate through all configured datasets and Shot numbers (1/5/10) to perform model fine-tuning.
 
-6. Run Inference Code
-----------------------------------------------------------------------
+## 6. Run Inference Code
+
 Execution command:
-$ bash run_inference_all_tasks.sh
+
+```bash
+bash run_inference_all_tasks.sh
+```
 
 This script will load the fine-tuned model generated in Step 5 and perform inference on the test set.
 
-Result Output:
+### Result Output
 The JSON result files generated by inference will be saved in the `OUTPUT/Inference_Results/` directory.
