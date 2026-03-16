@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: groundingdino_new
+Version: 0.1.0
+Summary: open-set object detector
+Home-page: https://github.com/IDEA-Research/GroundingDINO
+Author: International Digital Economy Academy, Shilong Liu
+License-File: LICENSE
+Requires-Dist: torch
+Requires-Dist: torchvision
+Requires-Dist: numpy
+Requires-Dist: einops
+Requires-Dist: shapely
+Requires-Dist: timm
+Requires-Dist: yacs
+Requires-Dist: tensorboardX
+Requires-Dist: ftfy
+Requires-Dist: prettytable
+Requires-Dist: pymongo
+Requires-Dist: transformers
+Requires-Dist: pycocotools
+Requires-Dist: scipy
+Requires-Dist: opencv-python
+Requires-Dist: einops-exts
+Requires-Dist: einops
+Requires-Dist: addict
+Requires-Dist: yapf
+Requires-Dist: supervision
+Requires-Dist: pandas
