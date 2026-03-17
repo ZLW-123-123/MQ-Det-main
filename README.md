@@ -55,8 +55,7 @@ mkdir -p OUTPUT/MQ-GD-COCO-Pretrain/
 ```
 
 **Model Download:**
-- **Baidu Netdisk**: [Link](https://pan.baidu.com/s/1dpqdTUs9mMbAs-t9zF4w0w?pwd=khtw)
-- **Extraction Code**: `khtw`
+- **Baidu Netdisk**: [Link](https://pan.baidu.com/s/18qNyIaUNHYJlZRxPONuCVQ?pwd=n4yd)
 
 **Decompression command:**
 
